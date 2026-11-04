@@ -13,19 +13,19 @@ html,body{height:100%;background:radial-gradient(ellipse at 50% 0%,#15233a 0%,va
 .s{height:100%;max-width:1680px;margin:0 auto;padding:10px 14px 8px;display:grid;grid-template-rows:auto 1fr auto auto;gap:8px}
 .top{display:grid;grid-template-columns:1.05fr .85fr 1.45fr;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:linear-gradient(180deg,#122038,#0c1728);min-height:86px}
 .top>div{padding:10px 14px}.top>div+div{border-left:1px solid var(--line)}
-.h1{font-size:clamp(22px,2.5vw,30px);font-weight:700;color:var(--g);letter-spacing:.06em}
+.h1{font-size:clamp(22px,2.5vw,30px);font-weight:700;color:var(--g);letter-spacing:.06em;text-shadow:0 0 18px rgba(246,226,160,.25)}
 .sub{margin-top:4px;font-size:12px;color:var(--m);letter-spacing:.12em}
 .st{text-align:center;display:flex;flex-direction:column;justify-content:center}
 .sl{font-size:11px;color:var(--m);letter-spacing:.18em}
-.sb{margin-top:4px;font-size:clamp(20px,2.3vw,28px);font-weight:700;color:var(--g)}
+.sb{margin-top:4px;font-size:clamp(20px,2.3vw,28px);font-weight:700;color:var(--g);text-shadow:0 0 20px rgba(246,226,160,.35)}
 .sm{margin-top:4px;font-size:11px;color:var(--m);font-family:var(--mono)}
 .pv{display:grid;gap:4px;align-content:center}
 .pv1{display:flex;justify-content:space-between;font-size:13px}
 .pv1 .d{color:var(--d);font-weight:600}.pv1 .r{color:var(--r);font-weight:600}
 .pv2{text-align:center;font-size:13px}.pv2 b{color:var(--d)}.pv2 b.x{color:var(--r)}
-.bar{height:13px;border-radius:2px;overflow:hidden;background:linear-gradient(90deg,#1a4f9a,#8a3030);position:relative}
-.bar>i{display:block;height:100%;width:50%;background:linear-gradient(90deg,#1e6fe0,#3d8be8);position:relative}
-.bar>i:after{content:"";position:absolute;right:0;top:0;bottom:0;width:2px;background:#fff}
+.bar{height:13px;border-radius:2px;overflow:hidden;background:linear-gradient(90deg,#1a4f9a,#8a3030);position:relative;box-shadow:0 0 12px rgba(80,140,255,.15) inset}
+.bar>i{display:block;height:100%;width:50%;background:linear-gradient(90deg,#1e6fe0,#3d8be8);position:relative;transition:width .8s ease}
+.bar>i:after{content:"";position:absolute;right:0;top:0;bottom:0;width:2px;background:#fff;box-shadow:0 0 8px #fff}
 .pv3{display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px}
 .pv3 .d{color:var(--d)}.pv3 .r{color:var(--r)}
 .main{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:4px;overflow:hidden;min-height:0;background:#0b1628}
@@ -36,35 +36,49 @@ html,body{height:100%;background:radial-gradient(ellipse at 50% 0%,#15233a 0%,va
 .cm{text-align:right;font-size:11px;color:var(--m);line-height:1.45}.cm b{color:var(--t)}
 .cs{font-size:12px;color:var(--m);margin-top:2px}.cs b.d{color:var(--d)}.cs b.r{color:var(--r)}
 .sc{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:6px;padding:2px 0 4px}
-.n{font-size:clamp(48px,6vw,78px);font-weight:800;line-height:.88;font-variant-numeric:tabular-nums}
-.n.d{color:#5aa7ff;text-shadow:0 0 28px rgba(90,167,255,.35)}.n.r{color:#ff6b6b;text-shadow:0 0 28px rgba(255,107,107,.3)}
+.n{font-size:clamp(48px,6vw,78px);font-weight:800;line-height:.88;font-variant-numeric:tabular-nums;transition:transform .25s}
+.n.flash{transform:scale(1.04)}
+.n.d{color:#5aa7ff;text-shadow:0 0 28px rgba(90,167,255,.45)}.n.r{color:#ff6b6b;text-shadow:0 0 28px rgba(255,107,107,.4)}
 .lab{font-size:13px;margin-top:2px;color:var(--m)}.lab b{color:var(--t)}
 .vo{font-family:var(--mono);font-size:12px;color:var(--m);margin-top:2px}
 .side.r{text-align:right}
 .mid{align-self:center;font-size:12px;color:var(--m);border-left:1px solid var(--line);padding-left:10px;white-space:nowrap}
-.mb{min-height:0;position:relative}.mb svg{width:100%;height:100%;display:block}
-path.st{stroke:#0b1424;stroke-width:.9}
-path.st.D{fill:#2f6fd0}path.st.R{fill:#c23d3d}path.st.T{fill:url(#hT)}path.st.S{fill:#2a3548}
+.mb{min-height:0;position:relative;overflow:hidden}
+.mb:before{content:"";position:absolute;inset:-20%;background:conic-gradient(from var(--spin,0deg),transparent 0 60%,rgba(110,200,255,.07) 72%,rgba(255,120,180,.08) 82%,rgba(120,255,180,.07) 92%,transparent 100%);animation:spin 8s linear infinite;pointer-events:none;mix-blend-mode:screen}
+@keyframes spin{to{--spin:360deg}}
+@property --spin{syntax:'<angle>';initial-value:0deg;inherits:false}
+.mb svg{width:100%;height:100%;display:block;position:relative;z-index:1}
+path.st{stroke:#0b1424;stroke-width:.9;transition:fill .6s ease,filter .6s ease}
+path.st.D{fill:#2f6fd0;filter:drop-shadow(0 0 2px rgba(80,160,255,.35))}
+path.st.R{fill:#c23d3d;filter:drop-shadow(0 0 2px rgba(255,100,100,.3))}
+path.st.T{fill:url(#hT)}path.st.S{fill:#2a3548}
+path.neon{fill:none;stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round;pointer-events:none;mix-blend-mode:screen;opacity:.95}
+path.neon.a{stroke:#5ad0ff;stroke-dasharray:10 18;animation:dash 2.8s linear infinite;filter:drop-shadow(0 0 4px #5ad0ff)}
+path.neon.b{stroke:#ff7ad9;stroke-dasharray:8 16;animation:dash 3.6s linear infinite reverse;filter:drop-shadow(0 0 4px #ff7ad9);opacity:.75}
+path.neon.c{stroke:#7dffa0;stroke-dasharray:6 14;animation:dash 4.4s linear infinite;filter:drop-shadow(0 0 3px #7dffa0);opacity:.55}
+@keyframes dash{to{stroke-dashoffset:-120}}
 .gov{border:1px solid var(--line);border-radius:4px;background:#0c1728;padding:8px 10px 10px}
 .gh{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:8px;font-size:14px}
 .gh span,.gs{font-size:12px;color:var(--m)}.gs b.d{color:var(--d)}.gs b.r{color:var(--r)}
 .gg{display:grid;grid-template-columns:repeat(18,minmax(0,1fr));gap:4px}
-.gt{border-radius:3px;padding:5px 4px;min-height:54px;display:flex;flex-direction:column;justify-content:space-between}
+.gt{border-radius:3px;padding:5px 4px;min-height:54px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
 .gt.D{background:linear-gradient(160deg,#2a66c0,#1a3f7a)}.gt.R{background:linear-gradient(160deg,#b53a3a,#6e1f1f)}
 .gt.T{background:repeating-linear-gradient(-45deg,#2f4568 0 5px,#7a6520 5px 10px)}.gt.S{background:#243044}
-.gt .c{font-family:var(--mono);font-size:11px;font-weight:700}.gt .n{font-size:10px;opacity:.88;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gt .c{font-family:var(--mono);font-size:11px;font-weight:700}.gt .n{font-size:10px;opacity:.88;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500;text-shadow:none;color:inherit}
 .gt .l{font-size:10px;font-weight:600}.gt .p{font-family:var(--mono);font-size:10px;opacity:.8}
 .ft{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;font-size:11px;color:var(--m)}
 .lg{display:flex;flex-wrap:wrap;gap:10px 14px}.lg i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:5px;vertical-align:-2px}
-.lg .ld{background:#2f6fd0}.lg .lr{background:#c23d3d}.lg .lt{background:repeating-linear-gradient(-45deg,#2f4568 0 3px,#7a6520 3px 6px)}.lg .ls{background:#2a3548}
+.lg .ld{background:#2f6fd0}.lg .lr{background:#c23d3d}.lg .lt{background:repeating-linear-gradient(-45deg,#2f4568 0 3px,#7a7020 3px 6px)}.lg .ls{background:#2a3548}
 .rm{font-family:var(--mono);font-size:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .dot{width:8px;height:8px;border-radius:50%;background:#3dffa8;display:inline-block;margin-right:5px;box-shadow:0 0 0 0 rgba(61,255,168,.5);animation:p 1.4s infinite}
 @keyframes p{0%{box-shadow:0 0 0 0 rgba(61,255,168,.55)}70%{box-shadow:0 0 0 10px rgba(61,255,168,0)}100%{box-shadow:0 0 0 0 rgba(61,255,168,0)}}
 .btn{background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--m);border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;font-family:var(--font)}
+.btn:hover{color:var(--t);border-color:rgba(180,210,255,.35)}
 .pill{border:1px solid rgba(61,255,168,.3);background:rgba(61,255,168,.08);color:#8dffc2;border-radius:999px;padding:3px 10px}
+.pill.warn{border-color:rgba(255,200,80,.35);background:rgba(255,200,80,.08);color:#ffd27a}
 .tip{position:fixed;z-index:20;pointer-events:none;background:rgba(8,12,22,.96);border:1px solid var(--line);padding:8px 10px;border-radius:8px;font-size:12px;opacity:0;max-width:240px}
 .tip.on{opacity:1}
-@media(max-width:1100px){body{overflow:auto}.s{height:auto;min-height:100%}.gg{grid-template-columns:repeat(12,minmax(0,1fr))}.top{grid-template-columns:1fr}.top>div+div{border-left:0;border-top:1px solid var(--line)}}
+@media(max-width:1100px){body{overflow:auto}.s{height:auto;min-height:100%}.gg{grid-template-columns:repeat(12,minmax(0,1fr))}.top{grid-template-columns:1fr}.top>div+div{border-left:0;border-top:1px solid var(--line)}.mb:before{display:none}}
 @media(max-width:720px){.main{grid-template-columns:1fr}.ch+.ch{border-left:0;border-top:1px solid var(--line)}.gg{grid-template-columns:repeat(6,minmax(0,1fr))}}
 </style>
 </head>
@@ -72,7 +86,7 @@ path.st.D{fill:#2f6fd0}path.st.R{fill:#c23d3d}path.st.T{fill:url(#hT)}path.st.S{
 <div class="s">
 <header class="top">
 <div><div class="h1">灯塔国再次点亮</div><div class="sub">2026 美国中期选举　U.S. MIDTERM ELECTIONS</div></div>
-<div class="st"><div class="sl">开票状态</div><div class="sb" id="sb">等待首批开票</div><div class="sm" id="sm">—</div></div>
+<div class="st"><div class="sl">开票状态</div><div class="sb" id="sb">开票倒计时</div><div class="sm" id="sm">—</div></div>
 <div class="pv">
 <div class="pv1"><span class="d" id="pd">民主党 —</span><span class="r" id="pr">— 共和党</span></div>
 <div class="pv2" id="pl">全国众院相关选票 · <b>—</b></div>
@@ -98,17 +112,22 @@ path.st.D{fill:#2f6fd0}path.st.R{fill:#c23d3d}path.st.T{fill:url(#hT)}path.st.S{
 </section>
 <footer class="ft">
 <div class="lg"><span><i class="ld"></i>民主党</span><span><i class="lr"></i>共和党</span><span><i class="lt"></i>胶着</span><span><i class="ls"></i>暂无</span></div>
-<div class="rm"><span class="pill" id="pill">官方同步</span><span><span class="dot"></span>LIVE</span><button class="btn" id="rf" type="button">立即刷新</button><span id="ft">civicAPI via sitmap</span></div>
+<div class="rm"><span class="pill" id="pill">同步中</span><span><span class="dot"></span>LIVE</span><button class="btn" id="rf" type="button">立即刷新</button><span id="ft">civicAPI via sitmap</span></div>
 </footer>
 </div>
 <div class="tip" id="tip"></div>
 <script>
-const API='https://sitmap.live/api/elections/us-2026.json';
+const SOURCES=[
+  'https://sitmap.live/api/elections/us-2026.json',
+  './data.json',
+  'https://raw.githubusercontent.com/mohiuddinanoj493-eng/aijj-site/main/data.json',
+  'https://cdn.jsdelivr.net/gh/mohiuddinanoj493-eng/aijj-site@main/data.json'
+];
 const CN={AL:'阿拉巴马',AK:'阿拉斯加',AZ:'亚利桑那',AR:'阿肯色',CA:'加利福尼亚',CO:'科罗拉多',CT:'康涅狄格',DE:'特拉华',FL:'佛罗里达',GA:'佐治亚',HI:'夏威夷',ID:'爱达荷',IL:'伊利诺伊',IN:'印第安纳',IA:'艾奥瓦',KS:'堪萨斯',KY:'肯塔基',LA:'路易斯安那',ME:'缅因',MD:'马里兰',MA:'马萨诸塞',MI:'密歇根',MN:'明尼苏达',MS:'密西西比',MO:'密苏里',MT:'蒙大拿',NE:'内布拉斯加',NV:'内华达',NH:'新罕布什尔',NJ:'新泽西',NM:'新墨西哥',NY:'纽约',NC:'北卡',ND:'北达',OH:'俄亥俄',OK:'俄克拉荷马',OR:'俄勒冈',PA:'宾州',RI:'罗得岛',SC:'南卡',SD:'南达',TN:'田纳西',TX:'得州',UT:'犹他',VT:'佛蒙特',VA:'弗吉尼亚',WA:'华盛顿',WV:'西弗',WI:'威斯康星',WY:'怀俄明',DC:'特区'};
 const F={1:'AL',2:'AK',4:'AZ',5:'AR',6:'CA',8:'CO',9:'CT',10:'DE',11:'DC',12:'FL',13:'GA',15:'HI',16:'ID',17:'IL',18:'IN',19:'IA',20:'KS',21:'KY',22:'LA',23:'ME',24:'MD',25:'MA',26:'MI',27:'MN',28:'MS',29:'MO',30:'MT',31:'NE',32:'NV',33:'NH',34:'NJ',35:'NM',36:'NY',37:'NC',38:'ND',39:'OH',40:'OK',41:'OR',42:'PA',44:'RI',45:'SC',46:'SD',47:'TN',48:'TX',49:'UT',50:'VT',51:'VA',53:'WA',54:'WV',55:'WI',56:'WY'};
 const $=id=>document.getElementById(id);
 const fmt=n=>(Math.round(n||0)).toLocaleString('en-US');
-let feats=null, last=null;
+let feats=null, last=null, lastSrc='';
 
 function lean(c){
   const a=c.candidates||[];
@@ -127,7 +146,7 @@ function lean(c){
   }
   return 'S';
 }
-function houseLean(cs){
+function houseLeanFromContests(cs){
   const bag={}; cs.filter(c=>c.chamber==='house').forEach(c=>{
     const st=c.jurisdiction&&c.jurisdiction.state; if(!st)return;
     bag[st]=bag[st]||{D:0,R:0,T:0,S:0}; bag[st][lean(c)]++;
@@ -136,19 +155,31 @@ function houseLean(cs){
     if(!o.D&&!o.R&&!o.T)m[st]='S'; else if(o.D===o.R)m[st]='T'; else m[st]=o.D>o.R?'D':'R';
   }); return m;
 }
-function senLean(cs){const m={}; cs.filter(c=>c.chamber==='senate').forEach(c=>{const st=c.jurisdiction&&c.jurisdiction.state; if(st)m[st]=lean(c)}); return m}
-function tally(d,ch){return (d.tallies||[]).find(t=>t.chamber===ch)||{}}
+function senLeanFromContests(cs){const m={}; cs.filter(c=>c.chamber==='senate').forEach(c=>{const st=c.jurisdiction&&c.jurisdiction.state; if(st)m[st]=lean(c)}); return m}
+function tally(d,ch){
+  if(d.tallies&&!Array.isArray(d.tallies)&&d.tallies[ch]) return d.tallies[ch];
+  return (d.tallies||[]).find(t=>t.chamber===ch)||{};
+}
+function setNum(id,v){
+  const el=$(id); if(!el) return;
+  const s=String(v);
+  if(el.textContent!==s){el.textContent=s; el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'),280)}
+}
 
 function draw(svg, color, title){
   if(!feats) return;
-  let defs=svg.querySelector('defs'); if(!defs){defs=document.createElementNS('http://www.w3.org/2000/svg','defs'); svg.prepend(defs);
+  let defs=svg.querySelector('defs');
+  if(!defs){
+    defs=document.createElementNS('http://www.w3.org/2000/svg','defs'); svg.prepend(defs);
     defs.innerHTML='<pattern id="hT" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(-45)"><rect width="6" height="6" fill="#2a4068"/><rect width="3" height="6" fill="#8a7020"/></pattern>';
   }
   let g=svg.querySelector('g.s');
+  let neon=svg.querySelector('g.neon');
   const path=d3.geoPath(d3.geoAlbersUsa().scale(1150).translate([488,305]));
   const tip=$('tip');
   if(!g){
     g=document.createElementNS('http://www.w3.org/2000/svg','g'); g.setAttribute('class','s'); svg.appendChild(g);
+    neon=document.createElementNS('http://www.w3.org/2000/svg','g'); neon.setAttribute('class','neon'); svg.appendChild(neon);
     feats.forEach(f=>{
       const st=F[Number(f.id)]||''; const d=path(f); if(!d)return;
       const p=document.createElementNS('http://www.w3.org/2000/svg','path');
@@ -157,54 +188,43 @@ function draw(svg, color, title){
       p.onpointermove=e=>{tip.style.left=(e.clientX+14)+'px'; tip.style.top=(e.clientY+14)+'px'};
       p.onpointerleave=()=>tip.classList.remove('on');
       g.appendChild(p);
+      ['a','b','c'].forEach(cls=>{
+        const n=document.createElementNS('http://www.w3.org/2000/svg','path');
+        n.setAttribute('d',d); n.setAttribute('class','neon '+cls); n.dataset.st=st; neon.appendChild(n);
+      });
     });
   }
   g.querySelectorAll('path.st').forEach(p=>{const L=color[p.dataset.st]||'S'; p.dataset.L=L; p.setAttribute('class','st '+L)});
+  // only light up states with activity (not pure empty grey alone — keep all neon for marquee)
+  svg.querySelectorAll('g.neon path').forEach(n=>{
+    const L=color[n.dataset.st]||'S';
+    n.style.opacity = L==='S' ? .22 : '';
+  });
 }
 
-function apply(d){
-  last=d;
-  const H=tally(d,'house'), S=tally(d,'senate'), G=tally(d,'governor');
-  const cs=d.contests||[];
+function normalize(raw){
+  // Accept full sitmap payload or compact data.json
+  if(raw.houseLean && raw.votes){
+    return {
+      generatedAt: raw.generatedAt||raw.fetchedAt,
+      fetchedAt: raw.fetchedAt,
+      dataState: raw.dataState||'counting',
+      counts: raw.counts||{},
+      tallies: raw.tallies||{},
+      votes: raw.votes,
+      houseLean: raw.houseLean||{},
+      senateLean: raw.senateLean||{},
+      governors: raw.governors||[],
+      compact:true
+    };
+  }
+  const cs=raw.contests||[];
   let dv=0,rv=0,sdv=0,srv=0;
   cs.forEach(c=>(c.candidates||[]).forEach(x=>{
     const v=x.votes||0;
     if(c.chamber==='house'){if(x.group==='dem')dv+=v; else if(x.group==='rep')rv+=v}
     if(c.chamber==='senate'){if(x.group==='dem')sdv+=v; else if(x.group==='rep')srv+=v}
   }));
-  const tot=dv+rv||1, dp=100*dv/tot;
-  $('pd').textContent=`民主党 ${dp.toFixed(1)}%`;
-  $('pr').textContent=`${(100-dp).toFixed(1)}% 共和党`;
-  $('pb').style.width=dp.toFixed(2)+'%';
-  $('pvd').textContent=fmt(dv)+' 票'; $('pvr').textContent=fmt(rv)+' 票';
-  const lead=Math.abs(dv-rv), dem=dv>=rv;
-  $('pl').innerHTML=`全国众院相关选票 · <b class="${dem?'':'x'}">${dem?'民主党领先':'共和党领先'} ${fmt(lead)} 票</b>`;
-
-  const hD=(H.won&&H.won.dem||0)+(H.leading&&H.leading.dem||0);
-  const hR=(H.won&&H.won.rep||0)+(H.leading&&H.leading.rep||0);
-  const hO=H.open||Math.max(0,435-hD-hR);
-  $('hd').textContent=hD; $('hr').textContent=hR;
-  $('hdv').textContent=fmt(dv)+' 票'; $('hrv').textContent=fmt(rv)+' 票';
-  $('hmd').textContent=hO?`其他 ${hO} 席　待定`:'全数已有结果';
-  $('hp').innerHTML=`选前席位　民主党 <b class="d">215</b>　共和党 <b class="r">220</b>`;
-  $('hm').innerHTML=`435 席 · 218 多数<br/>已计入 <b>${H.reporting||'—'}</b>/435<br/>已投影 <b>${H.called||0}</b>`;
-
-  const sD=S.control&&S.control.dem!=null?S.control.dem:((S.decided&&S.decided.dem||0)+(S.decided&&S.decided.ind||0));
-  const sR=S.control&&S.control.rep!=null?S.control.rep:(S.decided&&S.decided.rep||0);
-  $('sd').textContent=sD; $('sr').textContent=sR;
-  $('sdv').textContent=fmt(sdv)+' 票'; $('srv').textContent=fmt(srv)+' 票';
-  $('smd').textContent=(S.open||0)?`其他 ${S.open} 席　待定`:'参院格局已定';
-  $('sp').innerHTML=`现有席位　民主党 <b class="d">45</b>　共和党 <b class="r">53</b>　独立 <b>2</b>`;
-  $('sem').innerHTML=`100 席 · 改选 35<br/>已计入 <b>${S.reporting||35}</b>/35<br/>已投影 <b>${S.called||0}</b>`;
-
-  const st=d.dataState||'counting';
-  let txt={counting:'开票倒计时',live:'实时开票中',called:'关键结果已投影',final:'接近终局',prerace:'等待首批开票'}[st]||'开票倒计时';
-  if(!(H.reporting||0) && !dv) txt='等待首批开票';
-  $('sb').textContent=txt;
-
-  draw($('hmap'), houseLean(cs), '众院');
-  draw($('smap'), senLean(cs), '参院');
-
   const govs=[], seen=new Set();
   cs.filter(c=>c.chamber==='governor').forEach(c=>{
     const st=c.jurisdiction&&c.jurisdiction.state;
@@ -212,9 +232,68 @@ function apply(d){
     seen.add(st);
     const tops=(c.candidates||[]).slice().sort((a,b)=>(b.votes||0)-(a.votes||0));
     const a=tops[0], L=lean(c), called=!!(a&&a.winner)||!!(c.call&&c.call.winners&&c.call.winners.length);
-    govs.push({st,L,a,called,rpt:c.reportingPct});
+    govs.push({st,L,a:a?{group:a.group,votes:a.votes||0,pct:a.pct,name:a.name}:null,called,rpt:c.reportingPct});
   });
   govs.sort((a,b)=>a.st.localeCompare(b.st));
+  const arr=raw.tallies||[];
+  const tallies={};
+  arr.forEach(t=>{if(t&&t.chamber) tallies[t.chamber]=t});
+  return {
+    generatedAt: raw.generatedAt||raw.fetchedAt,
+    fetchedAt: raw.fetchedAt,
+    dataState: raw.dataState||'counting',
+    counts: raw.counts||{},
+    tallies,
+    votes:{house:{dem:dv,rep:rv},senate:{dem:sdv,rep:srv}},
+    houseLean: houseLeanFromContests(cs),
+    senateLean: senLeanFromContests(cs),
+    governors: govs,
+    compact:false
+  };
+}
+
+function apply(raw, src){
+  const d=normalize(raw);
+  last=d; lastSrc=src||lastSrc;
+  const H=tally(d,'house')||{}, S=tally(d,'senate')||{}, G=tally(d,'governor')||{};
+  const dv=d.votes.house.dem||0, rv=d.votes.house.rep||0;
+  const sdv=d.votes.senate.dem||0, srv=d.votes.senate.rep||0;
+  const tot=dv+rv||1, dp=100*dv/tot;
+  $('pd').textContent=`民主党 ${dp.toFixed(1)}%`;
+  $('pr').textContent=`${(100-dp).toFixed(1)}% 共和党`;
+  $('pb').style.width=dp.toFixed(2)+'%';
+  $('pvd').textContent=fmt(dv)+' 票'; $('pvr').textContent=fmt(rv)+' 票';
+  const lead=Math.abs(dv-rv), demLead=dv>=rv;
+  $('pl').innerHTML=`全国众院相关选票 · <b class="${demLead?'':'x'}">${demLead?'民主党领先':'共和党领先'} ${fmt(lead)} 票</b>`;
+
+  const hD=(H.won&&H.won.dem||0)+(H.leading&&H.leading.dem||0);
+  const hR=(H.won&&H.won.rep||0)+(H.leading&&H.leading.rep||0);
+  const hO=H.open!=null?H.open:Math.max(0,435-hD-hR);
+  setNum('hd', hD); setNum('hr', hR);
+  $('hdv').textContent=fmt(dv)+' 票'; $('hrv').textContent=fmt(rv)+' 票';
+  $('hmd').textContent=hO?`其他 ${hO} 席　待定`:'全数已有结果';
+  $('hp').innerHTML=`选前席位　民主党 <b class="d">215</b>　共和党 <b class="r">220</b>`;
+  $('hm').innerHTML=`435 席 · 218 多数<br/>已计入 <b>${H.reporting||'—'}</b>/435<br/>已投影 <b>${H.called||0}</b>`;
+
+  const sD=S.control&&S.control.dem!=null?S.control.dem:((S.decided&&S.decided.dem||0)+(S.decided&&S.decided.ind||0));
+  const sR=S.control&&S.control.rep!=null?S.control.rep:(S.decided&&S.decided.rep||0);
+  setNum('sd', sD); setNum('sr', sR);
+  $('sdv').textContent=fmt(sdv)+' 票'; $('srv').textContent=fmt(srv)+' 票';
+  $('smd').textContent=(S.open||0)?`其他 ${S.open} 席　待定`:'参院格局已定';
+  $('sp').innerHTML=`现有席位　民主党 <b class="d">45</b>　共和党 <b class="r">53</b>　独立 <b>2</b>`;
+  $('sem').innerHTML=`100 席 · 改选 35<br/>已计入 <b>${S.reporting||35}</b>/35<br/>已投影 <b>${S.called||0}</b>`;
+
+  const hasVotes = (dv+rv)>0 || (H.reporting||0)>0 || (d.counts&&d.counts.withVotes>0);
+  const st=d.dataState||'counting';
+  let txt={counting:'开票进行中',live:'实时开票中',called:'关键结果已投影',final:'接近终局',prerace:'开票倒计时'}[st]||'开票进行中';
+  if(!hasVotes) txt='等待首批开票';
+  else if(st==='counting'||st==='live') txt='开票进行中';
+  $('sb').textContent=txt;
+
+  draw($('hmap'), d.houseLean||{}, '众院');
+  draw($('smap'), d.senateLean||{}, '参院');
+
+  const govs=d.governors||[];
   let gD=0,gR=0,gO=0; const gg=$('gg'); gg.innerHTML='';
   govs.forEach(g=>{
     if(g.L==='D')gD++; else if(g.L==='R')gR++; else gO++;
@@ -229,26 +308,42 @@ function apply(d){
   $('gs').innerHTML=`领先/胜选　民主 <b class="d">${gD}</b>　共和 <b class="r">${gR}</b>　其他 <b>${gO}</b>`+((holdD||holdR)?`　｜　全国 民主 <b class="d">${(G.control&&G.control.dem)||(gD+holdD)}</b>　共和 <b class="r">${(G.control&&G.control.rep)||(gR+holdR)}</b>`:'');
   $('gp').textContent=`已计入 ${G.reporting||govs.length}/${G.contests||govs.length}　已投影 ${G.called||0}`;
   const gen=d.generatedAt||d.fetchedAt;
-  $('ft').textContent=`官方源 civicAPI（各州州务卿）via sitmap · ${gen?new Date(gen).toISOString().replace('T',' ').slice(0,19)+'Z':'—'}`;
-  $('pill').textContent='官方实时同步';
+  const srcLabel = (src||'').includes('sitmap') ? 'sitmap 官方' : ((src||'').includes('data.json')?'本地/镜像缓存':'数据源');
+  $('ft').textContent=`${srcLabel} · civicAPI · ${gen?new Date(gen).toISOString().replace('T',' ').slice(0,19)+'Z':'—'}`;
+  const pill=$('pill'); pill.textContent='官方实时同步'; pill.classList.remove('warn');
 }
 
 async function maps(){
   for(const u of ['https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json','https://unpkg.com/us-atlas@3/states-10m.json']){
-    try{const r=await fetch(u); if(r.ok){const t=await r.json(); feats=topojson.feature(t,t.objects.states).features; return}}catch(e){}
+    try{const r=await fetch(u); if(r.ok){const t=await r.json(); feats=topojson.feature(t,t.objects.states).features; return true}}catch(e){}
   }
+  return false;
 }
-async function refresh(why){
+
+async function fetchOne(url, timeoutMs){
+  const ctrl=new AbortController();
+  const t=setTimeout(()=>ctrl.abort(), timeoutMs||8000);
   try{
-    const r=await fetch(API+'?t='+Date.now(),{cache:'no-store'});
+    const r=await fetch(url+(url.includes('?')?'&':'?')+'t='+Date.now(),{cache:'no-store',signal:ctrl.signal,mode:'cors'});
     if(!r.ok) throw new Error('HTTP '+r.status);
-    apply(await r.json());
-    if(why==='manual') $('pill').textContent='已刷新官方数据';
-  }catch(e){
-    console.error(e);
-    if(!last){ $('sb').textContent='等待首批开票'; $('pill').textContent='等待首批开票'; }
-    else $('pill').textContent='同步中…稍后重试';
+    return await r.json();
+  } finally { clearTimeout(t) }
+}
+
+async function refresh(why){
+  const errors=[];
+  for(const url of SOURCES){
+    try{
+      const data=await fetchOne(url, url.includes('sitmap')?9000:6000);
+      apply(data, url);
+      if(why==='manual'){ const p=$('pill'); p.textContent='已刷新'; p.classList.remove('warn') }
+      return true;
+    }catch(e){ errors.push(url+': '+(e&&e.message||e)) }
   }
+  console.warn('refresh failed', errors);
+  if(!last){ $('sb').textContent='等待首批开票'; const p=$('pill'); p.textContent='等待数据源'; p.classList.add('warn'); }
+  else { const p=$('pill'); p.textContent='离线缓存中'; p.classList.add('warn'); }
+  return false;
 }
 function clock(){
   const n=new Date();
@@ -260,7 +355,7 @@ $('rf').onclick=()=>refresh('manual');
 (async()=>{
   await maps();
   await refresh('init');
-  setInterval(()=>refresh('auto'),3000);
+  setInterval(()=>refresh('auto'),5000);
   setInterval(clock,1000); clock();
 })();
 </script>
